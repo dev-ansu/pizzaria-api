@@ -8,13 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isAuthenticated = isAuthenticated;
 const jsonwebtoken_1 = require("jsonwebtoken");
-const prisma_1 = __importDefault(require("../prisma"));
 function isAuthenticated(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         // Receber o token
@@ -31,15 +27,15 @@ function isAuthenticated(req, res, next) {
             const { sub } = (0, jsonwebtoken_1.verify)(token, JWT_SECRET);
             // Recuperar o id do token e colocar dentro de uma variável user_id dentro do Request.
             req.user_id = sub;
-            const userExists = yield prisma_1.default.user.findUnique({
-                where: {
-                    id: sub,
-                }
-            });
-            if (!userExists) {
-                res.status(401).end();
-                return;
-            }
+            // const userExists = await prismaclient.user.findUnique({
+            //     where:{
+            //         id: sub,
+            //     }
+            // })
+            // if(!userExists){
+            //     res.status(401).end();
+            //     return;
+            // }
             next();
             return;
         }
