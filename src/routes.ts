@@ -1,5 +1,5 @@
 import { Router } from "express";
-import multer from "multer";
+// import multer from "multer";
 import { UserValidation } from "./middlewares/validations/user/user.validation";
 import { ValidateErrors } from "./middlewares/validate.validations.errors";
 import { HashUserPassowrd } from "./middlewares/validations/user/hash.user.password";
@@ -13,7 +13,7 @@ import { CategoryValidation } from "./middlewares/validations/categories/categor
 import ListCategoryController from "./controllers/categories/ListCategoryController";
 import CreateProductController from "./controllers/product/CreateProductController";
 import { ProductValidation } from "./middlewares/validations/product/product.validation";
-import uploadConfig from "./config/multer";
+// import uploadConfig from "./config/multer";
 import { ListByCategoryValidation } from "./middlewares/validations/product/listbycategory.validation";
 import ListByCategoryController from "./controllers/product/ListByCategoryController";
 import { OrderValidation } from "./middlewares/validations/order/order.validation";
@@ -35,7 +35,7 @@ import FinishOrderController from "./controllers/order/FinishOrderController";
 
 const router = Router();
 
-const upload = multer(uploadConfig.upload("./tmp"));
+// const upload = multer(uploadConfig.upload("./tmp"));
 
 // -- INÍCIO ROTAS USERS -- //
     

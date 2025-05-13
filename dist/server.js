@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -19,7 +10,6 @@ const routes_1 = require("./routes");
 const errorsHandler_1 = __importDefault(require("./middlewares/errors/errorsHandler"));
 const rateLimiterHandler_1 = require("./middlewares/rateLimiter/rateLimiterHandler");
 const path_1 = __importDefault(require("path"));
-const detect_port_1 = __importDefault(require("detect-port"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const isDev = process.env.NODE_ENV !== 'production';
 const DEFAULT_PORT = parseInt(process.env.DEFAULT_PORT || "3000", 10);
@@ -42,19 +32,19 @@ const startServer = (port, defaultPort) => {
         }
     });
 };
-function startDevelopmentServer() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const port = yield (0, detect_port_1.default)(DEFAULT_PORT);
-        startServer(port, DEFAULT_PORT);
-    });
-}
-function startProductionServer() {
-    const port = parseInt(process.env.PORT || DEFAULT_PORT.toString(), 10);
-    startServer(port);
-}
-if (isDev) {
-    startDevelopmentServer();
-}
-else {
-    startProductionServer();
-}
+app.listen(process.env.DEFAULT_PORT, () => {
+    console.log("Server running");
+});
+// async function startDevelopmentServer() {
+//   const port = await detect(DEFAULT_PORT);
+//   startServer(port, DEFAULT_PORT);
+// }
+// function startProductionServer() {
+//   const port = parseInt(process.env.PORT || DEFAULT_PORT.toString(), 10);
+//   startServer(port);
+// }
+// if (isDev) {
+//   startDevelopmentServer();
+// } else {
+//   startProductionServer();
+// }

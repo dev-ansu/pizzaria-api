@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = require("express");
-const multer_1 = __importDefault(require("multer"));
+// import multer from "multer";
 const user_validation_1 = require("./middlewares/validations/user/user.validation");
 const validate_validations_errors_1 = require("./middlewares/validate.validations.errors");
 const hash_user_password_1 = require("./middlewares/validations/user/hash.user.password");
@@ -19,7 +19,7 @@ const category_validation_1 = require("./middlewares/validations/categories/cate
 const ListCategoryController_1 = __importDefault(require("./controllers/categories/ListCategoryController"));
 const CreateProductController_1 = __importDefault(require("./controllers/product/CreateProductController"));
 const product_validation_1 = require("./middlewares/validations/product/product.validation");
-const multer_2 = __importDefault(require("./config/multer"));
+// import uploadConfig from "./config/multer";
 const listbycategory_validation_1 = require("./middlewares/validations/product/listbycategory.validation");
 const ListByCategoryController_1 = __importDefault(require("./controllers/product/ListByCategoryController"));
 const order_validation_1 = require("./middlewares/validations/order/order.validation");
@@ -39,7 +39,7 @@ const DetailOrderController_1 = __importDefault(require("./controllers/order/Det
 const FinishOrderController_1 = __importDefault(require("./controllers/order/FinishOrderController"));
 const router = (0, express_1.Router)();
 exports.router = router;
-const upload = (0, multer_1.default)(multer_2.default.upload("./tmp"));
+// const upload = multer(uploadConfig.upload("./tmp"));
 // -- INÍCIO ROTAS USERS -- //
 router.post("/users", user_validation_1.UserValidation, validate_validations_errors_1.ValidateErrors, hash_user_password_1.HashUserPassowrd, CreateUserController_1.default.handle);
 router.get("/me", isAuthenticated_1.isAuthenticated, DetailUserController_1.default.handle);

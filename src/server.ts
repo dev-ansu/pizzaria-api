@@ -37,20 +37,24 @@ const startServer = (port?: number, defaultPort?: number)=>{
     })
 }
 
-async function startDevelopmentServer() {
-  const port = await detect(DEFAULT_PORT);
-  startServer(port, DEFAULT_PORT);
-}
+app.listen(process.env.DEFAULT_PORT, ()=>{
+  console.log("Server running")        
+})
 
-function startProductionServer() {
-  const port = parseInt(process.env.PORT || DEFAULT_PORT.toString(), 10);
-  startServer(port);
-}
+// async function startDevelopmentServer() {
+//   const port = await detect(DEFAULT_PORT);
+//   startServer(port, DEFAULT_PORT);
+// }
 
-if (isDev) {
-  startDevelopmentServer();
-} else {
-  startProductionServer();
-}
+// function startProductionServer() {
+//   const port = parseInt(process.env.PORT || DEFAULT_PORT.toString(), 10);
+//   startServer(port);
+// }
+
+// if (isDev) {
+//   startDevelopmentServer();
+// } else {
+//   startProductionServer();
+// }
 
 
