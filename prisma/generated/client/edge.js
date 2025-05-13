@@ -173,7 +173,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "E:\\sujeitoprogramador\\pizzaria\\backend\\src\\generated\\prisma",
+      "value": "C:\\Users\\SERVIDOROURO\\Desktop\\pizzaria-api\\prisma\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -187,14 +187,14 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "E:\\sujeitoprogramador\\pizzaria\\backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\SERVIDOROURO\\Desktop\\pizzaria-api\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
-  "relativePath": "../../../prisma",
+  "relativePath": "../..",
   "clientVersion": "6.7.0",
   "engineVersion": "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed",
   "datasourceNames": [
@@ -210,8 +210,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// Criar uma migration: yarn prisma migrate dev [--name init]\nmodel User {\n  id         String    @id @default(uuid())\n  name       String\n  email      String\n  password   String\n  created_at DateTime? @default(now())\n  updated_at DateTime? @default(now()) @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Category {\n  id         String    @id @default(uuid())\n  name       String\n  created_at DateTime? @default(now())\n  updated_at DateTime? @default(now()) @updatedAt\n  categories Product[]\n\n  @@map(\"categories\")\n}\n\nmodel Product {\n  id          String    @id @default(uuid())\n  name        String\n  price       Float\n  description String\n  banner      String\n  created_at  DateTime? @default(now())\n  updated_at  DateTime? @default(now()) @updatedAt\n\n  category_id String\n  category    Category    @relation(fields: [category_id], references: [id])\n  OrderItem   OrderItem[]\n\n  @@map(\"products\")\n}\n\nmodel Order {\n  id     String  @id @default(uuid())\n  table  Int\n  status Boolean @default(false)\n  draft  Boolean @default(true)\n  name   String?\n\n  OrderItem OrderItem[]\n\n  created_at DateTime? @default(now())\n  updated_at DateTime? @default(now()) @updatedAt\n\n  @@map(\"orders\")\n}\n\nmodel OrderItem {\n  id       String @id @default(uuid())\n  amount   Int\n  price    Float // <- Salva o preço do produto no momento da compra\n  order_id String\n  order    Order  @relation(fields: [order_id], references: [id], onDelete: Cascade, onUpdate: Cascade)\n\n  product_id String\n  product    Product @relation(fields: [product_id], references: [id])\n\n  created_at DateTime? @default(now())\n  updated_at DateTime? @default(now()) @updatedAt\n\n  @@map(\"orderitems\")\n}\n",
-  "inlineSchemaHash": "f293f33748e116bf576d26b29f3f40e2e4ee6cab4b8798f90c9852bc2a922632",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// Criar uma migration: yarn prisma migrate dev [--name init]\nmodel User {\n  id         String    @id @default(uuid())\n  name       String\n  email      String\n  password   String\n  created_at DateTime? @default(now())\n  updated_at DateTime? @default(now()) @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Category {\n  id         String    @id @default(uuid())\n  name       String\n  created_at DateTime? @default(now())\n  updated_at DateTime? @default(now()) @updatedAt\n  categories Product[]\n\n  @@map(\"categories\")\n}\n\nmodel Product {\n  id          String    @id @default(uuid())\n  name        String\n  price       Float\n  description String\n  banner      String\n  created_at  DateTime? @default(now())\n  updated_at  DateTime? @default(now()) @updatedAt\n\n  category_id String\n  category    Category    @relation(fields: [category_id], references: [id])\n  OrderItem   OrderItem[]\n\n  @@map(\"products\")\n}\n\nmodel Order {\n  id     String  @id @default(uuid())\n  table  Int\n  status Boolean @default(false)\n  draft  Boolean @default(true)\n  name   String?\n\n  OrderItem OrderItem[]\n\n  created_at DateTime? @default(now())\n  updated_at DateTime? @default(now()) @updatedAt\n\n  @@map(\"orders\")\n}\n\nmodel OrderItem {\n  id       String @id @default(uuid())\n  amount   Int\n  price    Float // <- Salva o preço do produto no momento da compra\n  order_id String\n  order    Order  @relation(fields: [order_id], references: [id], onDelete: Cascade, onUpdate: Cascade)\n\n  product_id String\n  product    Product @relation(fields: [product_id], references: [id])\n\n  created_at DateTime? @default(now())\n  updated_at DateTime? @default(now()) @updatedAt\n\n  @@map(\"orderitems\")\n}\n",
+  "inlineSchemaHash": "e35ad55d74f9155aacc94628a2c285613a9ed5c563b11937a1597d9248709d52",
   "copyEngine": true
 }
 config.dirname = '/'
