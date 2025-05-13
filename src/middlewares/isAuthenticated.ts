@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
-import prismaclient from "../prisma";
+// import prismaclient from "../prisma";
 
 interface Payload{
     sub: string;
@@ -23,16 +23,16 @@ export async function isAuthenticated(req: Request, res: Response, next: NextFun
         // Recuperar o id do token e colocar dentro de uma variável user_id dentro do Request.
         req.user_id = sub;
 
-        const userExists = await prismaclient.user.findUnique({
-            where:{
-                id: sub,
-            }
-        })
+        // const userExists = await prismaclient.user.findUnique({
+        //     where:{
+        //         id: sub,
+        //     }
+        // })
 
-        if(!userExists){
-            res.status(401).end();
-            return;
-        }
+        // if(!userExists){
+        //     res.status(401).end();
+        //     return;
+        // }
 
         next();
         return
