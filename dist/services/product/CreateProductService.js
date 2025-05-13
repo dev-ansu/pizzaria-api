@@ -12,13 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const prisma_1 = require("../../generated/prisma");
-const prisma_2 = __importDefault(require("../../prisma"));
+const prisma_1 = __importDefault(require("../../prisma"));
 class CreateProductService {
     execute(_a) {
         return __awaiter(this, arguments, void 0, function* ({ name, banner, category_id, description, price }) {
             try {
-                const product = yield prisma_2.default.product.create({
+                const product = yield prisma_1.default.product.create({
                     data: {
                         name: name,
                         banner: banner,
@@ -30,11 +29,7 @@ class CreateProductService {
                 return { error: false, message: "Produto cadastrado com sucesso", product };
             }
             catch (err) {
-                if (err instanceof prisma_1.Prisma.PrismaClientKnownRequestError) {
-                    if (err.code === "P2025") {
-                        throw new Error("A categoria selecionada não existe.");
-                    }
-                }
+                throw new Error("A categoria selecionada não existe.");
             }
         });
     }

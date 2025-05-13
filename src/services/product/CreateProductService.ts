@@ -1,4 +1,3 @@
-import { Prisma } from "../../generated/prisma";
 import prismaclient from "../../prisma";
 
 export interface ProductRequest{
@@ -25,11 +24,9 @@ class CreateProductService{
             
             return {error: false, message:"Produto cadastrado com sucesso", product};
         }catch(err){
-            if (err instanceof Prisma.PrismaClientKnownRequestError) {
-                if (err.code === "P2025") {
-                    throw new Error("A categoria selecionada não existe.");
-                }
-            }
+        
+            throw new Error("A categoria selecionada não existe.");    
+            
         }
     }
 }
