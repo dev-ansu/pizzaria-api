@@ -5,11 +5,9 @@ import { router } from "./routes";
 import errorsHandler from "./middlewares/errors/errorsHandler";
 import { rateLimiterHandler } from "./middlewares/rateLimiter/rateLimiterHandler";
 import path from "path";
-import detect from "detect-port";
 import fileUpload from "express-fileupload";
 
-const isDev = process.env.NODE_ENV !== 'production';
-const DEFAULT_PORT = parseInt(process.env.DEFAULT_PORT || "3000", 10);
+
 const app = express();
 
 app.use("/files", 
@@ -27,15 +25,7 @@ app.use(router);
 
 app.use(errorsHandler);
 
-const startServer = (port?: number, defaultPort?: number)=>{
-    app.listen(port, ()=>{
-        const url = `http://localhost:${port}`;
-        console.log(`🚀 Server is running at ${url}`);
-        if(defaultPort && port !== DEFAULT_PORT){
-            console.warn(`⚠️ Port ${defaultPort} is in use. Switched to ${port}`)
-        }
-    })
-}
+
 
 app.listen(process.env.DEFAULT_PORT, ()=>{
   console.log("Server running")        

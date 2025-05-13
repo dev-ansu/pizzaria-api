@@ -11,8 +11,6 @@ const errorsHandler_1 = __importDefault(require("./middlewares/errors/errorsHand
 const rateLimiterHandler_1 = require("./middlewares/rateLimiter/rateLimiterHandler");
 const path_1 = __importDefault(require("path"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
-const isDev = process.env.NODE_ENV !== 'production';
-const DEFAULT_PORT = parseInt(process.env.DEFAULT_PORT || "3000", 10);
 const app = (0, express_1.default)();
 app.use("/files", express_1.default.static(path_1.default.resolve(__dirname, "..", "tmp")));
 app.use(rateLimiterHandler_1.rateLimiterHandler);
@@ -23,15 +21,6 @@ app.use((0, express_fileupload_1.default)({
 }));
 app.use(routes_1.router);
 app.use(errorsHandler_1.default);
-const startServer = (port, defaultPort) => {
-    app.listen(port, () => {
-        const url = `http://localhost:${port}`;
-        console.log(`🚀 Server is running at ${url}`);
-        if (defaultPort && port !== DEFAULT_PORT) {
-            console.warn(`⚠️ Port ${defaultPort} is in use. Switched to ${port}`);
-        }
-    });
-};
 app.listen(process.env.DEFAULT_PORT, () => {
     console.log("Server running");
 });
