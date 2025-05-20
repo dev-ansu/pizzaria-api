@@ -11,7 +11,7 @@ class ListCategoryService{
             }
         });
 
-        return {error: false, categories};
+        return categories;
     }
 }
 
